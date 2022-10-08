@@ -25,6 +25,7 @@ function App() {
 
     dispatch(createBucket({ text: text.current.value, completed: false }));
   };
+  
   return (
     <div className="App">
       <MyForm>
