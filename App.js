@@ -10,6 +10,16 @@ import Detail from "./Detail";
 import NotFound from "./NotFound";
 import Progress from "./Progress";
 
+import { db } from "./firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 function App() {
   const [list, setList] = React.useState([
@@ -21,12 +31,36 @@ function App() {
   const text = React.useRef(null);
   const dispatch = useDispatch();
 
+  React.useEffect(async () => {
+    console.log(db);
+
+    //Add(Create) collection
+    addDoc(collection(db, "buckets"), { text: "new", completed: false });
+
+    //Delete data
+    // const docRef = doc(db, "bucket", "kyeTYdc0Oq4PveTa7Nii");
+    // deleteDoc(docRef);
+
+    //Update data
+    // const docRef = doc(db, "bucket", "VHFmLJXO8mR0Q73nddM7");
+    // updateDoc(docRef, { completed: true });
+
+    //Add data
+    //addDoc(collection(db, "bucket"), { text: "new", completed: false });
+
+    //Get data
+    // const query = await getDocs(collection(db, "bucket"));
+    // console.log(query);
+    // query.forEach((doc) => {
+    //   console.log(doc.id, doc.data());
+    // });
+  }, []);
+
   const addBucketList = () => {
     //setList([...list, text.current.value]);
 
     dispatch(createBucket({ text: text.current.value, completed: false }));
   };
-  
   return (
     <div className="App">
       <MyForm>
@@ -60,7 +94,6 @@ function App() {
     </div>
   );
 }
-
 
 const MyForm = styled.div`
   background-color: #eee;
