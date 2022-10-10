@@ -10,6 +10,7 @@ import Detail from "./Detail";
 import NotFound from "./NotFound";
 import Progress from "./Progress";
 
+
 function App() {
   const [list, setList] = React.useState([
     "shopping",
