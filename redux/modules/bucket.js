@@ -1,8 +1,17 @@
 // bucket.js
-
-import { act } from "react-dom/test-utils";
+import { db } from "../../firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 // Actions(type)
+const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
 const UPDATE = "bucket/UPDATE";
 const DELETE = "bucket/DELETE";
@@ -18,6 +27,10 @@ const initialState = {
 };
 
 // Action Creators
+export function loadBucket(bucket_list) {
+  return { type: LOAD, bucket_list };
+}
+
 export function createBucket(bucket) {
   console.log("Will Create Action!");
   return { type: CREATE, bucket };
@@ -31,6 +44,14 @@ export function deleteBucket(bucket_index) {
   console.log("지울 bucket Index", bucket_index);
   return { type: DELETE, bucket_index };
 }
+
+//middlewares
+export const loadBucketFB = () => {
+  return async function (dispatch) {
+    const bucket_data = getDocs(collection(db, "bucket"));
+    cons;
+  };
+};
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {
