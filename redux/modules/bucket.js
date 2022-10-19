@@ -9,6 +9,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+
 // Actions(type)
 const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
