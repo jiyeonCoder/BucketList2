@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Routes, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createBucket } from "./redux/modules/bucket";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createBucket,
+  loadBucketFB,
+  addBucketFB,
+} from "./redux/modules/bucket";
 
 import "./App.css";
 import BucketList from "./BucketList";
 import Detail from "./Detail";
 import NotFound from "./NotFound";
 import Progress from "./Progress";
+import Spinner from "./Spinner";
 
 import { db } from "./firebase";
 import {
@@ -30,12 +35,14 @@ function App() {
 
   const text = React.useRef(null);
   const dispatch = useDispatch();
+  const is_loaded = useSelector((state) => state.bucket.is_loaded);
 
-  React.useEffect(async () => {
-    console.log(db);
+  React.useEffect(() => {
+    dispatch(loadBucketFB());
+    //console.log(db);
 
     //Add(Create) collection
-    addDoc(collection(db, "buckets"), { text: "new", completed: false });
+    //addDoc(collection(db, "buckets"), { text: "new", completed: false });
 
     //Delete data
     // const docRef = doc(db, "bucket", "kyeTYdc0Oq4PveTa7Nii");
@@ -59,7 +66,9 @@ function App() {
   const addBucketList = () => {
     //setList([...list, text.current.value]);
 
-    dispatch(createBucket({ text: text.current.value, completed: false }));
+    //dispatch(createBucket({ text: text.current.value, completed: false }));
+
+    dispatch(addBucketFB({ text: text.current.value, completed: false }));
   };
   return (
     <div className="App">
@@ -90,6 +99,7 @@ function App() {
           }}>
           Up
         </button>
+        {!is_loaded && <Spinner />}
       </MyForm>
     </div>
   );
