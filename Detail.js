@@ -1,9 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteBucket, updateBucket } from "./redux/modules/bucket";
+import {
+  deleteBucket,
+  deleteBucketFB,
+  updateBucket,
+  updateBucketFB,
+} from "./redux/modules/bucket";
 
 import { useNavigate } from "react-router-dom";
+
+import Button from "@material-ui/core/Button";
 
 const Detail = (props) => {
   const dispatch = useDispatch();
@@ -14,21 +21,27 @@ const Detail = (props) => {
 
   return (
     <div>
-      <h1>{bucket_list[bucket_index].text}</h1>
-      <button
+      <h1>{bucket_list[bucket_index] ? bucket_list[bucket_index].text : ""}</h1>
+      <Button
+        variant="outlined"
+        color="primary"
         onClick={() => {
-          dispatch(updateBucket(bucket_index));
+          //dispatch(updateBucket(bucket_index));
+          dispatch(updateBucketFB(bucket_list[bucket_index].id));
           history(-1);
         }}>
         Finished
-      </button>
-      <button
+      </Button>
+      <Button
+        variant="outlined"
+        color="secondary"
         onClick={() => {
-          dispatch(deleteBucket(bucket_index));
+          //dispatch(deleteBucket(bucket_index));
+          dispatch(deleteBucketFB(bucket_list[bucket_index].id));
           history(-1);
         }}>
         Delete
-      </button>
+      </Button>
     </div>
   );
 };
