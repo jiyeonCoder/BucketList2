@@ -10,7 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-// Actions(type)
+//type
 const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
 const UPDATE = "bucket/UPDATE";
@@ -31,7 +31,7 @@ const initialState = {
   // list: ["Shopping", "Bying House", "Traveling", "coding"],
 };
 
-// Action Creators
+//Action Creator, Returns Action
 export function loadBucket(bucket_list) {
   return { type: LOAD, bucket_list };
 }
@@ -118,15 +118,14 @@ export const deleteBucketFB = (bucket_id) => {
   };
 };
 
-// Reducer
+//Reducer+Reducer+...
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "bucket/LOAD": {
       return { list: action.bucket_list, is_loaded: true };
     }
-    // do reducer stuff
+    // Change the data
     case "bucket/CREATE": {
-      console.log("Now change the data!");
       const new_bucket_list = [...state.list, action.bucket];
       return { ...state, list: new_bucket_list, is_loaded: true };
     }
