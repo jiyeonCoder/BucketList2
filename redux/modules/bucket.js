@@ -10,7 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-//type
+//Actions, type
 const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
 const UPDATE = "bucket/UPDATE";
