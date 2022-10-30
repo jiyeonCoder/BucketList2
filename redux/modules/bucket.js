@@ -10,13 +10,14 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-//Actions, type
+//Action type
 const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
 const UPDATE = "bucket/UPDATE";
 const DELETE = "bucket/DELETE";
 const LOADED = "bucket/LOADED";
 
+//Initial State
 const initialState = {
   is_loaded: false,
   list: [
